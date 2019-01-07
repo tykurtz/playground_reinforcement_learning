@@ -4,8 +4,6 @@ import pygame
 
 
 def play_cart_pole(fps=30):
-    fps = 30
-
     env = gym.make('CartPole-v0')
     env.reset()
     env.render()
