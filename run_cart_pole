@@ -1,2 +1,7 @@
 #!/bin/bash
-docker run -it playground_reinforcement_learning bash
+docker run -it --runtime=nvidia --rm \
+               -e DISPLAY=$DISPLAY \
+               --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+               playground_reinforcement_learning
+ # --privileged
+# TODO Setup X11 connection outside of container
