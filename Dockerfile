@@ -15,17 +15,20 @@ COPY --from=nvidia/opengl:1.0-glvnd-runtime-ubuntu16.04 \
 
 RUN echo '/usr/local/lib/x86_64-linux-gnu' >> /etc/ld.so.conf.d/glvnd.conf && ldconfig
 
-ENV LD_LIBRARY_PATH /usr/local/lib/x86_64-linux-gnu:/usr/local/lib/i386-linux-gnu${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+#ENV LD_LIBRARY_PATH /usr/local/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 ### End install glvnd
 
 ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES},display
 
 
-RUN apt update && apt install -y python3-pip git x11-apps python3-opengl
+RUN apt update && apt install -y python3-pip git x11-apps python3-opengl xvfb
 # mesa-utils libgl1-mesa-glx
-RUN pip3 install gym pygame
-# opencv-python jupyter gym-super-mario-bros
+RUN pip3 install gym pygame jupyter
+# opencv-python gym-super-mario-bros
 
 RUN git clone https://github.com/tykurtz/playground_reinforcement_learning /notebooks/playground
 WORKDIR "/notebooks/playground"
+COPY run_jupyter.sh /
+
+CMD ["./run_jupyter"]
