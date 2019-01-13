@@ -24,11 +24,12 @@ ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES},display
 
 RUN apt update && apt install -y python3-pip git x11-apps python3-opengl xvfb
 # mesa-utils libgl1-mesa-glx
-RUN pip3 install gym pygame jupyter
+RUN pip3 install gym pygame
 # opencv-python gym-super-mario-bros
 
 RUN git clone https://github.com/tykurtz/playground_reinforcement_learning /notebooks/playground
 WORKDIR "/notebooks/playground"
 COPY run_jupyter.sh /
+COPY jupyter_notebook_config.py /root/.jupyter/
 
-CMD ["./run_jupyter"]
+CMD ["./run_jupyter.sh"]
