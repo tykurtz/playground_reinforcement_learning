@@ -1,0 +1,3 @@
+[submodule "tutorials/DeepRL-Agents"]
+	path = tutorials/DeepRL-Agents
+	url = https://github.com/awjuliani/DeepRL-Agents
